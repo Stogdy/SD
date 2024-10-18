@@ -1,0 +1,30 @@
+<script>
+    // Functie om de leeftijd te berekenen op basis van de geboortedatum
+    function berekenLeeftijd(geboorteJaar, geboorteMaand, geboorteDag) {
+        const vandaag = new Date();
+        const geboorteDatum = new Date(geboorteJaar, geboorteMaand - 1, geboorteDag);
+
+        const verschilInTijd = vandaag - geboorteDatum;
+        const verschilInDagen = verschilInTijd / (1000 * 60 * 60 * 24);
+        const leeftijdInJaren = verschilInDagen / 365.25;
+
+        return leeftijdInJaren.toFixed(2);
+    }
+
+    // Functie om de leeftijd te tonen
+    function toonLeeftijd() {
+        const geboorteJaar = document.getElementById("geboorteJaar").value;
+        const geboorteMaand = document.getElementById("geboorteMaand").value;
+        const geboorteDag = document.getElementById("geboorteDag").value;
+
+        if (geboorteJaar && geboorteMaand && geboorteDag) {
+            const leeftijd = berekenLeeftijd(geboorteJaar, geboorteMaand, geboorteDag);
+            document.getElementById("resultaat").textContent = `Je bent ${leeftijd} jaar oud.`;
+        } else {
+            document.getElementById("resultaat").textContent = "Vul alstublieft alle velden in.";
+        }
+    }
+
+    // Eventlistener toevoegen aan de knop
+    document.getElementById("berekenLeeftijdKnop").addEventListener("click", toonLeeftijd);
+</script>
